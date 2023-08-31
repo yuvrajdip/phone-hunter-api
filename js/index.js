@@ -23,16 +23,18 @@ const displayPhones = (phones) => {
 
   // ShowAll btn container
   const showAllContainer = document.getElementById('show-all-btn')
-  if(phones.length>5 ){
+  if (phones.length > 5) {
+    // show Show All btn
     showAllContainer.classList.remove('hidden')
+    phones = phones.slice(0, 5)
   }
-  else{
+  else {
+    // hide Show All button
     showAllContainer.classList.add('hidden')
   }
-  
+
   // display only 5 phones
-  phones = phones.slice(0,5)
-  
+
 
 
   phones.forEach((phone) => {
@@ -54,6 +56,8 @@ const displayPhones = (phones) => {
 
     phoneContainer.appendChild(phoneCardDiv)
   })
+
+  loadingSpinner(false)
 }
 
 
@@ -61,11 +65,25 @@ const displayPhones = (phones) => {
 
 // Search Button
 const handleSearch = () => {
+  loadingSpinner(true)   // logical thinking
   const searchField = document.getElementById('search-field')
   const searchText = searchField.value
   console.log(searchText);
   loadPhone(searchText); // calling loadPhone func
   document.getElementById('search-field').value = ''
 }
+
+
+// loading Spinner
+const loadingSpinner = (isLoading)=>{
+  const loadingSpinner = document.getElementById('loading-spinner')
+  
+  if(isLoading){
+    loadingSpinner.classList.remove('hidden')
+  }
+  else{
+    loadingSpinner.classList.add('hidden')
+  }
+} 
 
 loadPhone('iphone');
