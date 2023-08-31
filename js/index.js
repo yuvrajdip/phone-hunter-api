@@ -14,10 +14,26 @@ const loadPhone = async (searchText) => {
 // Displays phone-container div
 const displayPhones = (phones) => {
   console.log(phones);
-  
+
   //** important 2 lines */
   const phoneContainer = document.getElementById('phone-container')
+  // clear phoneContainer cards before adding new Cards
   phoneContainer.textContent = `` // or, phoneContainer.innerHTML = ``
+
+
+  // ShowAll btn container
+  const showAllContainer = document.getElementById('show-all-btn')
+  if(phones.length>5 ){
+    showAllContainer.classList.remove('hidden')
+  }
+  else{
+    showAllContainer.classList.add('hidden')
+  }
+  
+  // display only 5 phones
+  phones = phones.slice(0,5)
+  
+
 
   phones.forEach((phone) => {
     console.log(phone);
@@ -48,7 +64,8 @@ const handleSearch = () => {
   const searchField = document.getElementById('search-field')
   const searchText = searchField.value
   console.log(searchText);
-  loadPhone(searchText);
+  loadPhone(searchText); // calling loadPhone func
+  document.getElementById('search-field').value = ''
 }
 
 loadPhone('iphone');
